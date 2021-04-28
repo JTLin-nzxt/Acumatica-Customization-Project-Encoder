@@ -16,8 +16,8 @@ namespace AcumaticaCustomizationProjectEncoder
             if (filePath.Contains(".zip"))
             {
                 string folderPath = filePath.Replace(".zip", "");
-                unzipFile(filePath, folderPath);
-                await encodeProjectXMLAsync(folderPath);
+                UnzipFile(filePath, folderPath);
+                await EncodeProjectXMLAsync(folderPath);
             }
             else
             {
@@ -26,18 +26,18 @@ namespace AcumaticaCustomizationProjectEncoder
                 {
                     Console.WriteLine(zipFile);
                     string folderPath = zipFile.Replace(".zip", "");
-                    unzipFile(zipFile, folderPath);
-                    await encodeProjectXMLAsync(folderPath);
+                    UnzipFile(zipFile, folderPath);
+                    await EncodeProjectXMLAsync(folderPath);
                 }
             }
         }
 
-        public static void unzipFile(string filePath, string folderPath)
+        public static void UnzipFile(string filePath, string folderPath)
         {
             System.IO.Compression.ZipFile.ExtractToDirectory(filePath, folderPath);
         }
 
-        public static async Task encodeProjectXMLAsync(string folderPath) 
+        public static async Task EncodeProjectXMLAsync(string folderPath) 
         {
             var xmldoc = new XmlDocument();
             string xmlFilePath = String.Format("{0}\\project.xml", folderPath);

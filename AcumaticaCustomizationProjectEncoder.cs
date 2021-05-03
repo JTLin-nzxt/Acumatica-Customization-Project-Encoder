@@ -11,7 +11,8 @@ namespace AcumaticaCustomizationProjectEncoder
         {
             Console.WriteLine("Enter the zip file path (or only path to unzip all file in the same document) :");
 
-            string filePath = Console.ReadLine();
+            //string filePath = Console.ReadLine();
+            string filePath = Directory.GetCurrentDirectory();
 
             if (filePath.Contains(".zip"))
             {
@@ -28,6 +29,7 @@ namespace AcumaticaCustomizationProjectEncoder
                     string folderPath = zipFile.Replace(".zip", "");
                     UnzipFile(zipFile, folderPath);
                     await EncodeProjectXMLAsync(folderPath);
+                    DeleteZip(zipFile);
                 }
             }
         }
@@ -35,6 +37,11 @@ namespace AcumaticaCustomizationProjectEncoder
         public static void UnzipFile(string filePath, string folderPath)
         {
             System.IO.Compression.ZipFile.ExtractToDirectory(filePath, folderPath);
+        }
+
+        public static void DeleteZip(string filePath)
+        {
+            File.Delete(filePath);
         }
 
         public static async Task EncodeProjectXMLAsync(string folderPath) 
